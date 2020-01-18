@@ -3,8 +3,17 @@ services:
   build_service:
     build:
       dockerfile: Dockerfile
-      context: ./
+      context: ./mvf-api
     volumes:
-      - ./src:/var/www/service
+      - ./mvf-api/src:/var/www/service
     working_dir: /var/www/service
     command: composer install
+
+  build_webclient:
+    build:
+      dockerfile: Dockerfile
+      context: ./mvf-webclient
+    volumes:
+      - ./mvf-webclient:/usr/src/service
+    working_dir: /usr/src/service/src
+    command: bash -c "npm install"
