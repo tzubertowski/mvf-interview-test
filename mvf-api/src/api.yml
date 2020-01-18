@@ -1,0 +1,56 @@
+swagger: "2.0"
+info:
+  description: "Documentation for MVF test API"
+  version: "1.0.0"
+  title: "MVF languages API"
+host: "localhost"
+basePath: "/"
+paths:
+  /programming-languages:
+    get:
+      tags:
+      - "languages"
+      summary: "Get languages statistics for a user"
+      description: ""
+      operationId: "getLanguages"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: query
+          name: type
+          type: string
+          description: Type of statistics, eg. favourite to get favourite languages
+        - in: query
+          name: userName
+          type: string
+          description: Github username
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: "#/definitions/LanguageStatistics"
+        422:
+          description: Validation error
+          schema:
+            $ref: "#/definitions/ValidationError"
+definitions:
+  LanguageStatistics:
+    type: object
+    additionalProperties:
+      type: string
+      description: Key value store of language => count
+  ValidationError:
+    type: object
+    properties:
+      type:
+        type: array
+        description: Contains validation messages for "type" field
+        items:
+          type: string
+      userName:
+        type: array
+        description: Contains validation messages for "userName" field
+        items:
+          type: string
