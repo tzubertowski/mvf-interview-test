@@ -8,4 +8,6 @@ services:
       context: ./
     volumes:
       - ./src:/var/www/service
-    command: tail -f /dev/null
+    command: php -S 0.0.0.0:8000 -t public
+    ports:
+      - "8000:8000"

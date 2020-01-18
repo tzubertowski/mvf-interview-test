@@ -3,7 +3,7 @@
 $router->get(
     '/programming-languages',
     [
-        'as' => 'profile',
+        'as' => 'programming_languages',
         'uses' => 'ProgrammingLanguagesController@get',
     ]
 );
