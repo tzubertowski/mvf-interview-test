@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\User\UserRepository;
+use Github\Client;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,6 +15,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('UserGithubClient', function ($app) {
+            return (new Client())->api('user');
+        });
+        $this->app->bind(UserRepository::class, function ($app) {
+            return new UserRepository($app->make('UserGithubClient'));
+        });
     }
 }
