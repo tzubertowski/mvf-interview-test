@@ -14,14 +14,14 @@ class ProgrammingLanguages
     public function getStatistics()
     {
         $statistics = [];
-        foreach ($this->languages as $languageName) {
+        foreach ($this->languages as $key => $languageName) {
             // Filter out empty language names
-            if (!$languageName) {
+            if (empty($languageName)) {
                 continue;
             }
             if (isset($statistics[$languageName])) {
                 $statistics[$languageName] += 1;
-                break;
+                continue;
             }
             $statistics[$languageName] = 1;
         }
